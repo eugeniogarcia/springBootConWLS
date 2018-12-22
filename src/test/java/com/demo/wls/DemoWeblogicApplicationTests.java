@@ -1,4 +1,4 @@
-package com.demo.raphaufrj.demoweblogic;
+package com.demo.wls;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

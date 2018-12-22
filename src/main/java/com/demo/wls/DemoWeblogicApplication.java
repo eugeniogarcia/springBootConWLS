@@ -1,4 +1,4 @@
-package com.demo.raphaufrj.demoweblogic;
+package com.demo.wls;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

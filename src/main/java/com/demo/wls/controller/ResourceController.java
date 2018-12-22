@@ -1,4 +1,4 @@
-package com.demo.raphaufrj.demoweblogic.controller;
+package com.demo.wls.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

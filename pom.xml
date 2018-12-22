@@ -4,9 +4,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.demo.raphaufrj</groupId>
+	<groupId>com.demo.wls</groupId>
 	<artifactId>demo-weblogic</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<!-- WLS. Empaquetamos como un war -->
 	<packaging>war</packaging> <!-- modified -->
 
 	<name>demo-weblogic</name>
@@ -20,6 +21,7 @@
 	</parent>
 
 	<properties>
+	
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
@@ -34,13 +36,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
+		<!-- WLS. Indicamos que se use el Tomcat proporcionado/disponible en el weblogic. -->		
 		<dependency>
 		    <groupId>org.springframework.boot</groupId>
 		    <artifactId>spring-boot-starter-tomcat</artifactId>
@@ -48,7 +49,9 @@
 		</dependency>
 	</dependencies>
 	
-
+<!-- WLS. No esta estrictamente relacionado con el WLS. Queremos generar un buildnumber. El plugin de mojo
+que lo genera require tener configurado un control de versiones. Como estamos ejecutando esto en local
+especificamos un control de versiones dummy-->
     <scm>
         <connection>scm:svn:http://127.0.0.1/dummy</connection>
         <developerConnection>scm:svn:https://127.0.0.1/dummy</developerConnection>
@@ -62,7 +65,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			
+			<!-- WLS. No es estrictamente necesario para el WLS. Este plugin nos permite generar un buildnumber -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>buildnumber-maven-plugin</artifactId>
@@ -76,6 +79,8 @@
 					</execution>
 				</executions>
 				<configuration>
+					<!-- Generamos el buildnumber usando la implementacion javasvn. Esta implementacion nos permite
+					generar el build number sin usar un control de versiones -->
 					<doCheck>false</doCheck>
 			        <doUpdate>false</doUpdate>
 			        <revisionOnScmFailure>unknownbuild</revisionOnScmFailure>
@@ -89,7 +94,7 @@
 				</configuration>
 			</plugin>
 
-
+			<!-- WLS. Necesitamos usar el plugin maven que empaqueta como war -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
@@ -106,11 +111,7 @@
 					</archive>
 				</configuration>
 			</plugin>
-
-
 		</plugins>
-
 	</build>
-
 
 </project>
